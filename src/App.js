@@ -5,6 +5,9 @@ import { Blogpage } from './pages/Blogpage';
 import { Homepage } from './pages/Homepage';
 import { Notfoundpage } from './pages/Notfoundpage';
 import { Layout } from './components/Layout'
+import { Singlepage } from './pages/Singlepage';
+import { Createpage } from './pages/Createpage';
+import { Editpost } from './pages/Editpost';
 
 
 
@@ -16,6 +19,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Homepage />} />
             <Route path="posts" element={<Blogpage />} />
+            <Route path="posts/:id" element={<Singlepage />} />
+            <Route path="posts/new" element={<Createpage />} />
+            <Route path="posts/:id/edit" element={<Editpost />} />
             <Route path="about" element={<Aboutpage />} />
             <Route path="*" element={<Notfoundpage />} />
           </Route>

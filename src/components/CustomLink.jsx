@@ -5,8 +5,7 @@ import React from 'react'
 export const CustomLink = ({ children, to, ...props }) => {
 
     const match = useMatch(to, children)
-    console.log(match);
-    console.log(children)
+
 
     return (
         <Link
