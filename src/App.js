@@ -8,30 +8,40 @@ import { Layout } from './components/Layout'
 import { Singlepage } from './pages/Singlepage';
 import { Createpage } from './pages/Createpage';
 import { Editpost } from './pages/Editpost';
+import { Loginpage } from './pages/Loginpage'
+import { RequireAuth } from './hoc/RequireAuth'
+import { AuthProvider } from './hoc/AuthProvider'
 
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
-            <Route path="posts" element={<Blogpage />} />
-            <Route path="posts/:id" element={<Singlepage />} />
-            <Route path="posts/new" element={<Createpage />} />
-            <Route path="posts/:id/edit" element={<Editpost />} />
-            <Route path="about" element={<Aboutpage />} />
-            <Route path="about-us" element={<Navigate to="/about" replace />} />
-            <Route path="*" element={<Notfoundpage />} />
-          </Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Homepage />} />
+              <Route path="about" element={<Aboutpage />} />
+              <Route path="about-us" element={<Navigate to="/about" replace />} />
+              <Route path="posts" element={<Blogpage />} />
+              <Route path="posts/:id" element={<Singlepage />} />
+              <Route path="posts/:id/edit" element={<Editpost />} />
+              <Route path="posts/new" element={
+                <RequireAuth>
+                  <Createpage />
+                </RequireAuth>
 
-        </Routes>
+              } />
+              <Route path="login" element={<Loginpage />} />
+              <Route path="*" element={<Notfoundpage />} />
+            </Route>
 
-      </div>
-    </BrowserRouter>
+          </Routes>
 
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
