@@ -4,7 +4,10 @@ import React from 'react'
 
 export const CustomLink = ({ children, to, ...props }) => {
 
-    const match = useMatch(to, children)
+    const match = useMatch({
+        path: to,
+        end: to.length === 1,
+    })
 
 
     return (
